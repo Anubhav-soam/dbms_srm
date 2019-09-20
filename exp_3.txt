@@ -1,0 +1,212 @@
+SQL*Plus: Release 11.2.0.1.0 Production on Tue Aug 13 12:12:47 2019
+
+Copyright (c) 1982, 2010, Oracle.  All rights reserved.
+
+Enter user-name: RA1711003010283@csedb
+Enter password:
+
+Connected to:
+Oracle Database 11g Enterprise Edition Release 11.2.0.1.0 - Production
+With the Partitioning, OLAP, Data Mining and Real Application Testing options
+
+SQL> show tables
+SP2-0158: unknown SHOW option "tables"
+SQL> show tables;
+SP2-0158: unknown SHOW option "tables"
+SQL> select * fromdepartment;
+select * fromdepartment
+         *
+ERROR at line 1:
+ORA-00923: FROM keyword not found where expected
+
+
+SQL> select * from department;
+
+no rows selected
+
+SQL>
+SQL>
+SQL>
+SQL> create table lab(name varchar2(20),roll int,age int);
+
+Table created.
+
+SQL> insert into lab('anubhav',12,19);
+insert into lab('anubhav',12,19)
+                *
+ERROR at line 1:
+ORA-00928: missing SELECT keyword
+
+
+SQL> insert into lab values ('anubhav',12,19);
+
+1 row created.
+
+SQL> insert into lab values ('ishan',9,11);
+
+1 row created.
+
+SQL> insert into lab values ('smiral',16,21);
+
+1 row created.
+
+SQL> select * from department;
+
+no rows selected
+
+SQL> select * from sports;
+select * from sports
+              *
+ERROR at line 1:
+ORA-00942: table or view does not exist
+
+
+SQL> select * from sport;
+select * from sport
+              *
+ERROR at line 1:
+ORA-00942: table or view does not exist
+
+
+SQL> create table consumer(id int NOTNULL,name varchar(20),address varchar(20),PRIMARY KEY(id));
+create table consumer(id int NOTNULL,name varchar(20),address varchar(20),PRIMARY KEY(id))
+                             *
+ERROR at line 1:
+ORA-00907: missing right parenthesis
+
+
+SQL> create table consumer(id int NOT NULL,name varchar(20),address varchar(20),PRIMARY KEY(id));
+
+Table created.
+
+SQL> insert into lab values (1,'anubhav','delhi');
+insert into lab values (1,'anubhav','delhi')
+                          *
+ERROR at line 1:
+ORA-01722: invalid number
+
+
+SQL> insert into consumer values (1,'anubhav','delhi');
+
+1 row created.
+
+SQL> insert into consumer values (2,'raj','taj');
+
+1 row created.
+
+SQL> insert into consumer values (3,'dharmesh','puri');
+
+1 row created.
+
+SQL> create table orders(oid int NOT NULL,order_no int NOT NULL,id int,PRIMARY KEY(oid));
+
+Table created.
+
+SQL> insert into orders values (1,228,3);
+
+1 row created.
+
+SQL> insert into orders values (2,254,3);
+
+1 row created.
+
+SQL> insert into orders values (3,453,2);
+
+1 row created.
+
+SQL> alter table orders ADD FOREIGN KEY(id);
+alter table orders ADD FOREIGN KEY(id)
+                                     *
+ERROR at line 1:
+ORA-00905: missing keyword
+
+
+SQL> alter table orders ADD FOREIGN KEY(id)
+  2  REFERENCE customer(id);
+REFERENCE customer(id)
+*
+ERROR at line 2:
+ORA-00905: missing keyword
+
+
+SQL> alter table orders ADD FOREIGN KEY(id)
+  2  REFERENCES customer(id);
+REFERENCES customer(id)
+           *
+ERROR at line 2:
+ORA-00942: table or view does not exist
+
+
+SQL> alter table orders ADD FOREIGN KEY(id)
+  2  REFERENCE consumer(id);
+REFERENCE consumer(id)
+*
+ERROR at line 2:
+ORA-00905: missing keyword
+
+
+SQL> alter table orders ADD FOREIGN KEY(id)
+  2  REFERENCES consumer(id);
+
+Table altered.
+
+SQL> select * from consumer;
+
+        ID NAME                 ADDRESS
+---------- -------------------- --------------------
+         1 anubhav              delhi
+         2 raj                  taj
+         3 dharmesh             puri
+
+SQL> select * from orders;
+
+       OID   ORDER_NO         ID
+---------- ---------- ----------
+         1        228          3
+         2        254          3
+         3        453          2
+
+SQL> alter table consumer add(age int);
+
+Table altered.
+
+SQL> alter table consumer add check (age>0);
+
+Table altered.
+
+SQL> updated consumer set age=-1 where id=1;
+SP2-0734: unknown command beginning "updated co..." - rest of line ignored.
+SQL> select * from consumer;
+
+        ID NAME                 ADDRESS                     AGE
+---------- -------------------- -------------------- ----------
+         1 anubhav              delhi
+         2 raj                  taj
+         3 dharmesh             puri
+
+SQL> updated consumer set age=-1 where id=1;
+SP2-0734: unknown command beginning "updated co..." - rest of line ignored.
+SQL> update consumer set age=-1 where id=1;
+update consumer set age=-1 where id=1
+*
+ERROR at line 1:
+ORA-02290: check constraint (RA1711003010283.SYS_C0014908) violated
+
+
+SQL> select * from consumer;
+
+        ID NAME                 ADDRESS                     AGE
+---------- -------------------- -------------------- ----------
+         1 anubhav              delhi
+         2 raj                  taj
+         3 dharmesh             puri
+
+SQL> select *from orders;
+
+       OID   ORDER_NO         ID
+---------- ---------- ----------
+         1        228          3
+         2        254          3
+         3        453          2
+
+SQL>
