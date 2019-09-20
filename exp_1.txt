@@ -93,4 +93,4 @@ SQL> select * from class;
 
 SQL> truncate table class;
 
-Table truncated.
+Table truncated...
