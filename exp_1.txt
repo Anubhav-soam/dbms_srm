@@ -1,0 +1,96 @@
+
+SQL*Plus: Release 11.2.0.1.0 Production on Fri Jul 12 13:23:57 2019
+
+Copyright (c) 1982, 2010, Oracle.  All rights reserved.
+
+Enter user-name: RA1711003010283@csedb
+Enter password:
+
+Connected to:
+Oracle Database 11g Enterprise Edition Release 11.2.0.1.0 - Production
+With the Partitioning, OLAP, Data Mining and Real Application Testing options
+
+SQL> create table class(sno int, sname varchar(10), sreg int);
+
+Table created.
+
+SQL> insert into class values(1,anubhav,361);
+
+1 row created.
+
+SQL> insert into class values(2,'Bhuvan',335);
+
+1 row created.
+
+SQL> insert into class values(3,'Ajith',331);
+
+1 row created.
+
+SQL> insert into class values(4,'Atchaya',381);
+
+1 row created.
+
+SQL> insert into class values(5,'Gautha,',377);
+
+1 row created.
+
+SQL> select * from class;
+
+       SNO SNAME            SREG
+---------- ---------- ----------
+         1 Smiral             361
+         2 Bhuvan            335
+         3 Ajith             331
+         4 Atchaya           381
+         5 Gautha,           377
+
+SQL> delete from class where sno=5;
+
+1 row deleted.
+
+SQL> select * from class;
+
+       SNO SNAME            SREG
+---------- ---------- ----------
+         1 anubhav             361
+         2 Bhuvan            335
+         3 Ajith             331
+         4 Atchaya           381
+
+SQL> desc class;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+
+ SNO                                                NUMBER(38)
+ SNAME                                              VARCHAR2(10)
+ SREG                                               NUMBER(38)
+
+SQL> update class set sreg=377 where sno=4;
+
+1 row updated.
+
+SQL> select * from class;
+
+       SNO SNAME            SREG
+---------- ---------- ----------
+         1 Smiral             361
+         2 Bhuvan            335
+         3 Ajith             331
+         4 Atchaya           377
+
+SQL> alter table class add(rank int);
+
+Table altered.
+
+SQL> select * from class;
+
+       SNO SNAME            SREG       RANK
+---------- ---------- ---------- ----------
+         1 Smiral             361
+         2 Bhuvan            335
+         3 Ajith             331
+         4 Atchaya           377
+
+SQL> truncate table class;
+
+Table truncated.
